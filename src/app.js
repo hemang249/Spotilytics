@@ -1,9 +1,12 @@
 const express = require('express')
 const request = require('request')
 const querystring = require('querystring')
+const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 const publicDir = path.join(__dirname , '../public/')
 app.use(express.static(publicDir))
 app.set('view engine', 'html')
@@ -44,6 +47,24 @@ app.get('/callback', function(req, res) {
   })
 })
 
+app.get('/stats', (req,res)=>{
+    console.log(req.query.access_token)
+    let headers = {
+        url: 'https://api.spotify.com/v1/me/player/recently-played',
+        
+        headers: {
+          'Authorization': req.query.access_token
+        },
+        json: true
+    }
+
+    request.post(headers, function(error, response, body) { 
+        console.log(response.body)
+        res.send(response)
+    })
+
+})
+
 let port = process.env.PORT || 3000
-console.log(`Listening on port ${port}. Go /login to initiate authentication flow.`)
+console.log(`Listening on port ${port}.`)
 app.listen(port)
