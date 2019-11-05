@@ -1,0 +1,14 @@
+.header {
+  max-width: 100%;
+  height: 10vh;
+  background-image: linear-gradient(to right, #7bd760, #1ed82a, #05da4f); }
+
+.heading-primary {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #3b3939; }
+
+* {
+  font-family: 'Roboto';
+  margin: 0;
+  padding: 0; }

@@ -1,0 +1,8 @@
+@import '../var.scss';
+
+.header{
+    
+    max-width: 100%;
+    height: 10vh;
+    background-image: linear-gradient(to right, $light-green, $green, $dark-green);
+}
