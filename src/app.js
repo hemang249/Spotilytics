@@ -4,6 +4,8 @@ const querystring = require('querystring')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
+const classifier = require('./stats')
+var access_token = null
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -48,7 +50,7 @@ app.get('/callback', function(req, res) {
 })
 
 app.get('/stats', (req,res)=>{
-    console.log(req.query.access_token)
+    access_token = req.query.access_token
     let headers = {
         url: 'https://api.spotify.com/v1/me/player/recently-played',
         
@@ -58,8 +60,8 @@ app.get('/stats', (req,res)=>{
         json: true
     }
 
-    request.post(headers, function(error, response, body) { 
-        console.log(response.body)
+    request.get(headers, function(error, response, body) { 
+        classifier(response.body.items , access_token)
         res.send(response)
     })
 

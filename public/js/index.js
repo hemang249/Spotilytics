@@ -1,14 +1,23 @@
 const access_token = decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent('access_token').replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"))
 const url = '/stats'
 
-var http = new XMLHttpRequest()
-http.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       console.log("Success")
-    }
-};
+fetch(`${url}?access_token=Bearer ${access_token}`)
+    .then((res)=>{
+        if(res.status !== 200){
+            alert("Some Error Occurred !")
+            return
+        }
 
-http.open('GET',`/stats?access_token=Bearer ${access_token}`,true)
-http.setRequestHeader("Content-type", "application/json")
-http.send()
+        res.json().then((data)=>{
+            console.log(data)
+        }).catch((e)=>{
+            alert(e)
+        })
+    })
+    .catch((e)=>{
+        alert(`API Error : ${e}`)
+    })
+
+
+
 
