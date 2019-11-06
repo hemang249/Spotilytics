@@ -1,5 +1,7 @@
 const request = require('request')
-const categories = require('./categories')
+const {categories , filteredCategories} = require('./categories')
+const userGenres = []
+const userGenreHistory = {}
 
 const classifier = (items , access_token)=>{
     items.forEach((item)=>{
@@ -14,8 +16,28 @@ const classifier = (items , access_token)=>{
         }
 
         request.get(headers , (error, response , body)=>{
-            console.log(response.body)
+            let genres = response.body.genres
+            let selectedGenre = null
+            genres.forEach((genre)=>{
+                filteredCategories.forEach((category)=>{
+                    if(genre.includes(category)){
+                        selectedGenre = category
+                        return
+                    }
+                })
+                
+
+
+                userGenres.push(selectedGenre)
+            })
+            console.log(userGenres)
+
+
         })
     })
 }
+
+
+
+
 module.exports = classifier
