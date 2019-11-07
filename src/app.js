@@ -26,6 +26,10 @@ app.get('/login', function(req, res) {
     }))
 })
 
+app.get('/dashboard',(req,res)=>{
+  res.sendFile(path.resolve(__dirname + '/../public/dashboard.html'))
+})
+
 app.get('/callback', function(req, res) {
   let code = req.query.code || null
   let authOptions = {
@@ -52,7 +56,7 @@ app.get('/callback', function(req, res) {
 app.get('/stats', (req,res)=>{
     access_token = req.query.access_token
     let headers = {
-        url: 'https://api.spotify.com/v1/me/player/recently-played',
+        url: 'https://api.spotify.com/v1/me/player/recently-played?limit=50',
         
         headers: {
           'Authorization': req.query.access_token
@@ -64,8 +68,9 @@ app.get('/stats', (req,res)=>{
         classifier(response.body.items , access_token)
         setTimeout(()=>{
           console.log(userGenreHistory)
+          res.send(userGenreHistory)
         }, 3000 )
-        res.send(response)
+        
     })
 
 })

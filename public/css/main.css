@@ -40,6 +40,10 @@
     text-align: center;
     color: #3b3939; }
 
+.chart {
+  width: 500px;
+  height: 500px; }
+
 * {
   font-family: 'Roboto';
   margin: 0;

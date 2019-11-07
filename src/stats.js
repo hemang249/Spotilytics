@@ -4,6 +4,7 @@ var userGenres = []
 const userGenreHistory = []
 
 const classifier = (items , access_token)=>{
+    console.log(items.length)
     items.forEach((item)=>{
         var artistId = item.track.artists[0].id
         let headers = {
@@ -33,7 +34,13 @@ const classifier = (items , access_token)=>{
                 if(selectedGenre !== null){
                     userGenres.push(selectedGenre)
                     break
-                } 
+                }else {
+                    filteredCategories.forEach((category)=>{
+                        if(genres[i].includes(category)){
+                            selectedGenre = category
+                        }
+                    })
+                }
     
             }
     
