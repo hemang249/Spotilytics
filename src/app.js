@@ -13,7 +13,7 @@ const publicDir = path.join(__dirname , '../public/')
 app.use(express.static(publicDir))
 app.set('view engine', 'html')
 
-let redirect_uri = 'http://127.0.0.1:3000/callback'
+let redirect_uri = process.env.REDIRECT_URI  || 'http://127.0.0.1:3000/callback'
 
 
 app.get('/login', function(req, res) {
