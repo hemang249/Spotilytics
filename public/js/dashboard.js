@@ -46,7 +46,6 @@ const displayCategoryChart = (chartConfig)=>{
         data: {
             labels: chartConfig.labels,
             datasets: [{
-                label: '# of Votes',
                 data: chartConfig.data,
                 backgroundColor: [
                     'rgb(255, 99, 132)',
@@ -64,14 +63,6 @@ const displayCategoryChart = (chartConfig)=>{
                 borderWidth: 1
             }]
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
+        
     });
 }
