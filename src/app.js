@@ -61,7 +61,8 @@ app.get('/stats', (req,res)=>{
     }
 
     request.get(headers, function(error, response, body) { 
-        classifier(response.body.items , access_token)
+        let userGenres = classifier(response.body.items , access_token)
+        console.log(userGenres)
         res.send(response)
     })
 
