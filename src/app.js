@@ -13,8 +13,8 @@ const publicDir = path.join(__dirname , '../public/')
 app.use(express.static(publicDir))
 app.set('view engine', 'html')
 
-let redirect_uri = 
-  'http://127.0.0.1:3000/callback'
+let redirect_uri = 'http://127.0.0.1:3000/callback'
+
 
 app.get('/login', function(req, res) {
   res.redirect('https://accounts.spotify.com/authorize?' +
@@ -44,7 +44,7 @@ app.get('/callback', function(req, res) {
   }
   request.post(authOptions, function(error, response, body) {
     var access_token = body.access_token
-    let uri = process.env.FRONTEND_URI || 'http://127.0.0.1:3000/'
+    let uri = process.env.FRONTEND_URI || 'http://127.0.0.1:3000/dashboard'
     res.redirect(uri + '?access_token=' + access_token)
   })
 })

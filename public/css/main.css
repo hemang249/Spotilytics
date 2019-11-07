@@ -23,6 +23,8 @@
   border: none;
   background-image: linear-gradient(to right, #7bd760, #1ed82a, #05da4f);
   font-weight: 600; }
+  .btn-signin:hover {
+    cursor: pointer; }
 
 .hero {
   max-width: 100%;

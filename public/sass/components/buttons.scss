@@ -9,5 +9,11 @@
         border: none;
         background-image: linear-gradient(to right , $light-green , $green, $dark-green);
         font-weight: 600;
+    
+        &:hover{
+            cursor: pointer;
+        }
     }
+
+
 }
