@@ -4,7 +4,7 @@ const querystring = require('querystring')
 const bodyParser = require('body-parser')
 const path = require('path')
 const app = express()
-const classifier = require('./stats')
+const {classifier , userGenreHistory} = require('./stats')
 var access_token = null
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -61,8 +61,10 @@ app.get('/stats', (req,res)=>{
     }
 
     request.get(headers, function(error, response, body) { 
-        let userGenres = classifier(response.body.items , access_token)
-        console.log(userGenres)
+        classifier(response.body.items , access_token)
+        setTimeout(()=>{
+          console.log(userGenreHistory)
+        }, 3000 )
         res.send(response)
     })
 

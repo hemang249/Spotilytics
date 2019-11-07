@@ -1,7 +1,7 @@
 const request = require('request')
 const {categories , filteredCategories} = require('./categories')
 var userGenres = []
-const userGenreHistory = {}
+const userGenreHistory = []
 
 const classifier = (items , access_token)=>{
     items.forEach((item)=>{
@@ -23,41 +23,54 @@ const classifier = (items , access_token)=>{
             for(let i = 0 ; i < genres.length ; i++){
                 for(let j = 0 ; j < categories.length ; j++){
                     if(categories[j][0] === genres[i]){
+                        //console.log(genres[i])
                         selectedGenre = categories[j][1]
                         break
-
+    
                     }
                 }
                 
-                if(selectedGenre === null){
-                    for(let k = 0 ; k < filteredCategories.length ; k++){
-                        if(genres[i].includes(categories[k])){
-                            selectedGenre = categories[k]
-                            break
-                        }
-                    }
-                } else {
+                if(selectedGenre !== null){
                     userGenres.push(selectedGenre)
                     break
-                }
-
+                } 
+    
             }
-
-
+    
+        
         })
-
-
-
 
         
     })
 
+    setTimeout(()=>{
+        categoryCounter(userGenres)
+    },3000)
     // SET UP ASYNC AWAIT TO GET ACCESS TO USERGENRES HERE
     
 
 }
 
+const categoryCounter = (userGenres)=>{
+    let prev = null
+    let genres = [] , count = []
+    userGenres.sort()
+    userGenres.forEach((genre)=>{
+        if(genre!==prev){
+            genres.push(genre)
+            count.push(1)
+        } else {
+            count[count.length-1]++
+        }
 
+        prev = genre
+        
+    })
 
+    genres.forEach((genre , index)=>{
+        userGenreHistory.push([genre , count[index]])
+    })
+   // console.log(userGenreHistory)
+}
 
-module.exports = classifier
+module.exports = {userGenreHistory , classifier}
