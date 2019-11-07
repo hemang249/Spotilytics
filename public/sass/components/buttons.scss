@@ -1,0 +1,13 @@
+.btn{
+    &-signin{
+        width: 50%;
+        height: 7vh;
+        margin-left: 25%;
+        margin-right: 25%;
+        margin-top: 4rem;
+        border-radius: 1rem;
+        border: none;
+        background-image: linear-gradient(to right , $light-green , $green, $dark-green);
+        font-weight: 600;
+    }
+}
